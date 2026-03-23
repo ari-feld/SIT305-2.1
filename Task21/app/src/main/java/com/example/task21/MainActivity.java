@@ -53,13 +53,21 @@ public class MainActivity extends AppCompatActivity {
                 int arrayResourceFrom;
 
                 switch (selectedType) {
-                    case "Length":
-                        arrayResourceTo = R.array.length_input;
-                        arrayResourceFrom = R.array.length_output;
+                    case "Currency":
+                        arrayResourceTo = R.array.currency;
+                        arrayResourceFrom = R.array.currency;
                         break;
-                    case "Weight":
-                        arrayResourceTo = R.array.weight_input;
-                        arrayResourceFrom = R.array.weight_output;
+                    case "Fuel Efficiency":
+                        arrayResourceTo = R.array.fuel;
+                        arrayResourceFrom = R.array.fuel;
+                        break;
+                    case "Volume":
+                        arrayResourceTo = R.array.volume;
+                        arrayResourceFrom = R.array.volume;
+                        break;
+                    case "Distance":
+                        arrayResourceTo = R.array.distance;
+                        arrayResourceFrom = R.array.distance;
                         break;
                     case "Temperature":
                         arrayResourceTo = R.array.temperature_units;
@@ -118,27 +126,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private double convert(String type, String from, String to, Double value) {
-
         switch (type) {
-            case "Length":
-                //Convert to meters for simplicity
-                double meters = value;
-                if (from.equals("Inch")) meters = value / 39.37;
-                if (from.equals("Foot")) meters = value / 3.281;
-                if (from.equals("Yard")) meters = value / 1.094;
-                if (from.equals("Miles")) meters = value * 1609;
+            case "Currency":
+                //Convert to USD for simplicity
+                double USDollars = value;
+                if (from.equals("USD")) USDollars = value;
+                if (from.equals("AUD")) USDollars = value / 1.55;
+                if (from.equals("EUR")) USDollars = value / 0.92;
+                if (from.equals("JPY")) USDollars = value / 148.50;
+                if (from.equals("GBP")) USDollars = value / 0.78;
 
-                if (to.equals("Centimeters")) return meters * 100;
-                if (to.equals("Kilometers")) return meters / 1000;
-            case "Weight":
-                //Convert to grams for simplicity
-                double grams = value;
-                if (from.equals("Ounce")) grams = value * 28.35;
-                if (from.equals("Pound")) grams = value * 453.6;
-                if (from.equals("Ton")) grams = value * 907185;
+                if (to.equals("USD")) return USDollars;
+                if (to.equals("AUD")) return USDollars * 1.55;
+                if (to.equals("EUR")) return USDollars * 0.92;
+                if (to.equals("JPY")) return USDollars * 148.50;
+                if (to.equals("GBP")) return USDollars * 0.78;
 
-                if (to.equals("Gram")) return grams;
-                if (to.equals("Kilogram")) return grams / 1000;
+            case "Fuel Efficiency":
+                if (from.equals("MPG") && to.equals("km/L")) return value * 0.425;
+                if (from.equals("km/L") && to.equals("MPG")) return value / 0.425;
+                return value;
+
+            case "Volume":
+                if (from.equals("Gallon (US)") && to.equals("Liters")) return value * 3.785;
+                if (from.equals("Liters") && to.equals("Gallon (US)")) return value / 3.785;
+                return value;
+
+            case "Distance":
+                if (from.equals("Nautical Miles") && to.equals("Kilometers")) return value * 1.852;
+                if (from.equals("Kilometers") && to.equals("Nautical Miles")) return value / 1.852;
+                return value;
+
             case "Temperature":
                 //Conver to celcius for simplicity
                 double celsius = value;
