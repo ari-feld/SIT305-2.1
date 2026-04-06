@@ -12,6 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task31">
         <activity
+            android:name=".ResultsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Question5Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Question4Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Question3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Question2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Question1Activity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
